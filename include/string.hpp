@@ -12,6 +12,7 @@ namespace teg {
 	public:
 		String() noexcept;
 		String(const char* str);
+		String(const std::string& str);
 		String(const String& other);
 		String(String&& other) noexcept;
 		~String() noexcept;
