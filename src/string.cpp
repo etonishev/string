@@ -1,6 +1,6 @@
 #include "../string.hpp"
 
-teg::String::String() :
+teg::String::String() noexcept :
 	m_buffer(nullptr), m_size(0) { }
 
 teg::String::String(const char* str) :
@@ -16,9 +16,14 @@ teg::String::String(const char* str) :
 }
 
 teg::String::String(const String& other) :
-	m_buffer(new char[other.size() + 1]), m_size(other.size()) {
+	m_buffer(nullptr), m_size(0) {
 
+	if (other.empty())
+		return;
+
+	m_buffer = new char[other.size() + 1];
 	std::strcpy(m_buffer, other);
+	m_size = other.size();
 
 }
 
@@ -29,13 +34,13 @@ teg::String::String(String&& other) noexcept :
 
 }
 
-teg::String::~String() {
+teg::String::~String() noexcept {
 
 	clear();
 
 }
 
-void teg::String::clear() {
+void teg::String::clear() noexcept{
 
 	delete[] m_buffer;
 	m_buffer = nullptr;
@@ -43,37 +48,37 @@ void teg::String::clear() {
 
 }
 
-bool teg::String::empty() const {
+bool teg::String::empty() const noexcept {
 
 	return m_size == 0;
 
 }
 
-std::size_t teg::String::size() const {
+std::size_t teg::String::size() const noexcept {
 
 	return m_size;
 
 }
 
-std::size_t teg::String::length() const {
+std::size_t teg::String::length() const noexcept {
 
 	return size();
 
 }
 
-teg::String::operator const char* () const {
+teg::String::operator const char* () const noexcept {
 
 	return m_buffer;
 
 }
 
-const char& teg::String::operator[](std::size_t idx) const {
+const char& teg::String::operator[](std::size_t idx) const noexcept {
 
 	return m_buffer[idx];
 
 }
 
-char& teg::String::operator[](std::size_t idx) {
+char& teg::String::operator[](std::size_t idx) noexcept {
 
 	return m_buffer[idx];
 
@@ -85,6 +90,9 @@ teg::String& teg::String::operator=(const String& other) {
 		return *this;
 
 	clear();
+
+	if (other.empty())
+		return *this;
 
 	m_buffer = new char[other.size() + 1];
 	std::strcpy(m_buffer, other);
@@ -151,37 +159,37 @@ teg::String& teg::String::operator+(const char* other) {
 
 }
 
-bool teg::operator==(const String& lhv, const String& rhv) {
+bool teg::operator==(const String& lhv, const String& rhv) noexcept {
 
 	return std::strcmp(lhv, rhv) == 0;
 
 }
 
-bool teg::operator!=(const String& lhv, const String& rhv) {
+bool teg::operator!=(const String& lhv, const String& rhv) noexcept {
 
 	return !(lhv == rhv);
 
 }
 
-bool teg::operator>(const String& lhv, const String& rhv) {
+bool teg::operator>(const String& lhv, const String& rhv) noexcept {
 	
 	return std::strcmp(lhv, rhv) > 0;
 
 }
 
-bool teg::operator<(const String& lhv, const String& rhv) {
+bool teg::operator<(const String& lhv, const String& rhv) noexcept {
 
 	return !(lhv > rhv) && (lhv != rhv);
 
 }
 
-bool teg::operator>=(const String& lhv, const String& rhv) {
+bool teg::operator>=(const String& lhv, const String& rhv) noexcept {
 
 	return (lhv > rhv) || (lhv == rhv);
 
 }
 
-bool teg::operator<=(const String& lhv, const String& rhv) {
+bool teg::operator<=(const String& lhv, const String& rhv) noexcept {
 
 	return (lhv < rhv) || (lhv == rhv);
 

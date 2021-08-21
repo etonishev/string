@@ -10,21 +10,21 @@ namespace teg {
 	class String {
 
 	public:
-		String();
+		String() noexcept;
 		String(const char* str);
 		String(const String& other);
 		String(String&& other) noexcept;
-		~String();
+		~String() noexcept;
 
-		void clear();
-		bool empty() const;
-		std::size_t size() const;
-		std::size_t length() const;
+		void clear() noexcept;
+		bool empty() const noexcept;
+		std::size_t size() const noexcept;
+		std::size_t length() const noexcept;
 
-		operator const char* () const;
+		operator const char* () const noexcept;
 
-		const char& operator[](std::size_t idx) const;
-		char& operator[](std::size_t idx);
+		const char& operator[](std::size_t idx) const noexcept;
+		char& operator[](std::size_t idx) noexcept;
 
 		String& operator=(const String& other);
 		String& operator=(String&& other) noexcept;
@@ -33,12 +33,12 @@ namespace teg {
 		String& operator+(const char* other);
 
 	public:
-		friend bool operator==(const String& lhv, const String& rhv);
-		friend bool operator!=(const String& lhv, const String& rhv);
-		friend bool operator>(const String& lhv, const String& rhv);
-		friend bool operator<(const String& lhv, const String& rhv);
-		friend bool operator>=(const String& lhv, const String& rhv);
-		friend bool operator<=(const String& lhv, const String& rhv);
+		friend bool operator==(const String& lhv, const String& rhv) noexcept;
+		friend bool operator!=(const String& lhv, const String& rhv) noexcept;
+		friend bool operator>(const String& lhv, const String& rhv) noexcept;
+		friend bool operator<(const String& lhv, const String& rhv) noexcept;
+		friend bool operator>=(const String& lhv, const String& rhv) noexcept;
+		friend bool operator<=(const String& lhv, const String& rhv) noexcept;
 
 		friend void swap(String& lhv, String& rhv) noexcept;
 		friend std::ostream& operator<<(std::ostream& os, const String& string);

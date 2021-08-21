@@ -4,10 +4,12 @@
 
 int main() {
 
-	teg::String array[5];
+	teg::String str;
+	teg::String copyStr(str);
 
-	for (std::size_t i = 0; i < std::size(array); ++i)
-		std::cin >> array[i];
+	copyStr = copyStr + str;
+
+	std::cout << copyStr << '\n';
 
 	return 0;
 
