@@ -5,7 +5,7 @@
 int main() {
 
 	teg::String str;
-	teg::String copyStr(str);
+	teg::String copyStr(std::string("dsf"));
 
 	copyStr = copyStr + str;
 

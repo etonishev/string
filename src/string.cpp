@@ -15,6 +15,9 @@ teg::String::String(const char* str) :
 
 }
 
+teg::String::String(const std::string& str) :
+	String(str.c_str()) { }
+
 teg::String::String(const String& other) :
 	m_buffer(nullptr), m_size(0) {
 
