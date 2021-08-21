@@ -1,4 +1,8 @@
+#include <iostream>
+
 #include "../string.hpp"
+
+
 
 teg::String::String() noexcept :
 	m_buffer(nullptr), m_size(0) { }
@@ -217,8 +221,8 @@ std::istream& teg::operator>>(std::istream& is, String& string) {
 
 	string.clear();
 
-	const std::size_t bufferSize = 1024;
-	char buffer[1024];
+	constexpr std::size_t bufferSize = 1024;
+	char buffer[bufferSize];
 
 	while (is.get(buffer, bufferSize))
 		string = string + buffer;
