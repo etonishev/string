@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../string.hpp"
+#include "../include/string.hpp"
 
 
 
@@ -87,7 +87,7 @@ const char& teg::String::operator[](std::size_t idx) const noexcept {
 
 char& teg::String::operator[](std::size_t idx) noexcept {
 
-	return m_buffer[idx];
+	return const_cast<char&>(static_cast<const String&>(*this)[idx]);
 
 }
 
@@ -179,14 +179,14 @@ bool teg::operator!=(const String& lhv, const String& rhv) noexcept {
 }
 
 bool teg::operator>(const String& lhv, const String& rhv) noexcept {
-	
-	return std::strcmp(lhv, rhv) > 0;
+
+	return rhv < lhv;
 
 }
 
 bool teg::operator<(const String& lhv, const String& rhv) noexcept {
-
-	return !(lhv > rhv) && (lhv != rhv);
+	
+	return std::strcmp(lhv, rhv) < 0;
 
 }
 
